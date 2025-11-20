@@ -1,7 +1,6 @@
 import random
 import time
 #Variables
-shake_type = 'porkandbeans777'
 slow_typing = True
 #>Lists
 question_list = []
@@ -85,26 +84,19 @@ while True:
     question = input()
     question = question.lower()
     question_list = question.split(" ")
-    typer("How hard would you like to shake the ball?")
-    print('1. Soft\n2. Normal\n3. Hard')
-    shake_type = input()
-    shake_type = shake_type.lower()
-    while True:
-        if shake_type == '1' or shake_type == 'one' or shake_type == 'soft':
+    shake_type = random.randint(1, 3)
+    if 'bite' == question_list[0]:
+        Ball.bite()
+    else:
+        typer('Shaking the eight ball...')
+        if shake_type == 1:
+            typer("That was weak, I know you can do better!")
             Ball.soft_shake()
-            break
-        elif shake_type == '2' or shake_type == 'two' or shake_type == 'normal':
+        elif shake_type == 2:
+            typer("Alright, that was pretty good! Good job!")
             Ball.normal_shake()
-            break
-        elif shake_type == '3' or shake_type == 'three' or shake_type == 'hard':
+        elif shake_type == 3:
+            typer("Wow, that was aggresive... Are you alright?")
             Ball.hard_shake()
-            break
-        elif shake_type == 'bite':
-            Ball.bite()
-            break
         else:
-            print('Either you misspelled something, or chose something that wasn\'t an answer. Please try again.')
-            typer("How hard would you like to shake the ball?")
-            print('1. Soft\n2. Normal\n3. Hard')
-            shake_type = input()
-            shake_type = shake_type.lower()
+            print('literally how.')
