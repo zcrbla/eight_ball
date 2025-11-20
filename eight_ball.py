@@ -88,16 +88,19 @@ while True:
     if 'bite' == question_list[0]:
         Ball.bite()
     else:
-        typer('Shaking the eight ball')
-        typer('...', delay = 0.5)
-        if shake_type == 1:
-            typer("That was weak, I know you can do better!")
-            Ball.soft_shake()
-        elif shake_type == 2:
-            typer("Alright, that was pretty good! Good job!")
-            Ball.normal_shake()
-        elif shake_type == 3:
-            typer("Wow, that was aggresive... Are you alright?")
-            Ball.hard_shake()
-        else:
-            print('literally how.')
+        try:
+            typer('Shaking the eight ball')
+            typer('...', delay = 0.5)
+            if shake_type == 1:
+                typer("That was weak, I know you can do better!")
+                Ball.soft_shake()
+            elif shake_type == 2:
+                typer("Alright, that was pretty good! Good job!")
+                Ball.normal_shake()
+            elif shake_type == 3:
+                typer("Wow, that was aggresive... Are you alright?")
+                Ball.hard_shake()
+            else:
+                print('literally how.') 
+        except Exception as e:
+            typer(f"An error occured: {e}")
