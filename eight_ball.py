@@ -69,7 +69,7 @@ class Ball():
             hard_probabilities[2] -= 0.05
         selected_item = random.choices(hard_shake, weights=hard_probabilities, k=1)[0]
         if 'bet' in question_list or 'gamble' in question_list or 'gambling' in question_list:
-            selected_item = 'Yes, and i hope you lose!.'
+            selected_item = 'Yes, and I hope you lose!.'
         typer("...", delay = 0.5)
         typer(selected_item)
     def bite():
@@ -88,7 +88,8 @@ while True:
     if 'bite' == question_list[0]:
         Ball.bite()
     else:
-        typer('Shaking the eight ball...')
+        typer('Shaking the eight ball')
+        typer('...', delay = 0.5)
         if shake_type == 1:
             typer("That was weak, I know you can do better!")
             Ball.soft_shake()
