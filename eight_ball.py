@@ -1,0 +1,110 @@
+import random
+import time
+#Variables
+shake_type = 'porkandbeans777'
+slow_typing = True
+#>Lists
+question_list = []
+soft_shake = ['Answer unclear... Try again later.', 'Maybe.', 'Probably.', 'Probably not.']
+hard_shake = ['No, no, no!', 'Yes, yeah, sure, whatever.', 'Hey! Don\'t shake so hard!', 'Try asking somebody who knows!']
+normal_shake = ['Yes.', 'Maybe.', 'No.', 'It could happen...']
+bite = ['Ow! Why would you bite an 8 ball??', 'What is wrong with you?! Enjoy the toxic liquids!', 'Getting your macroplastics, I see.', 'cayden... it\'s you...']
+#>>Probabilities
+bite_probabilities = [0.60, 0.20, 0.20, 0.001]
+
+def typer(text, delay=0.05):
+    if slow_typing == True:
+        for char in text:
+            print(char, end = '', flush = True)
+            time.sleep(delay)
+        print()
+    else:
+        text = text.split(" ")
+        for word in text:
+            print(word, end=' ', flush = True)
+            time.sleep(delay)
+        print()
+class Ball():
+    def normal_shake():
+        global normal_shake, normal_probabilities
+        normal_probabilities = [0.25, 0.25, 0.25, 0.25]
+        if 'should' in question_list:
+            normal_probabilities[2] += 0.25
+        if 'will' in question_list:
+            normal_probabilities[3] += 0.50
+        if '?' in question_list:
+            normal_probabilities[1] += 0.30
+        if '?' not in question_list:
+            normal_probabilities[0] -= 0.05
+        selected_item = random.choices(normal_shake, weights=normal_probabilities, k=1)[0]
+        if 'bet' in question_list or 'gamble' in question_list or 'gambling' in question_list:
+            selected_item = 'Yes.'
+        typer("...", delay = 0.5)
+        typer(selected_item)
+    def soft_shake():
+        global soft_shake, soft_probabilities
+        soft_probabilities = [0.25, 0.25, 0.25, 0.25]
+        if 'should' in question_list:
+            soft_probabilities[2] += 0.25
+        if 'will' in question_list:
+            soft_probabilities[3] += 0.50
+        if '?' in question_list:
+            soft_probabilities[1] += 0.30
+        if '?' not in question_list:
+            soft_probabilities[0] += 0.40
+        selected_item = random.choices(soft_shake, weights=soft_probabilities, k=1)[0]
+        if 'bet' in question_list or 'gamble' in question_list or 'gambling' in question_list:
+            selected_item = 'Yeah... I guess...'
+        typer("...", delay = 0.5)
+        typer(selected_item)
+    def hard_shake():
+        global hard_shake, hard_probabilities
+        hard_probabilities = [0.25, 0.25, 0.25, 0.25]
+        if 'should' in question_list:
+            hard_probabilities[0] += 0.25
+        if 'will' in question_list:
+            hard_probabilities[1] += 0.50
+        if '?' in question_list:
+            hard_probabilities[2] -= 0.03
+        if '?' not in question_list:
+            hard_probabilities[2] -= 0.05
+        selected_item = random.choices(hard_shake, weights=hard_probabilities, k=1)[0]
+        if 'bet' in question_list or 'gamble' in question_list or 'gambling' in question_list:
+            selected_item = 'Yes, and i hope you lose!.'
+        typer("...", delay = 0.5)
+        typer(selected_item)
+    def bite():
+        global bite_shake, bite_probabilities
+        bite_probabilities[1] += 0.10
+        bite_probabilities[2] += 0.10
+        bite_probabilities[3] += 0.001
+        selected_item = random.choices(bite, weights=bite_probabilities, k=1)[0]
+        typer(selected_item)
+while True:
+    typer("What is your question?")
+    question = input()
+    question = question.lower()
+    question_list = question.split(" ")
+    typer("How hard would you like to shake the ball?")
+    print('1. Soft\n2. Normal\n3. Hard')
+    shake_type = input()
+    shake_type = shake_type.lower()
+    while True:
+        if shake_type == '1' or shake_type == 'one' or shake_type == 'soft':
+            Ball.soft_shake()
+            break
+        elif shake_type == '2' or shake_type == 'two' or shake_type == 'normal':
+            Ball.normal_shake()
+            break
+        elif shake_type == '3' or shake_type == 'three' or shake_type == 'hard':
+            Ball.hard_shake()
+            break
+        elif shake_type == 'bite':
+            Ball.bite()
+            break
+        else:
+            print('Either you misspelled something, or chose something that wasn\'t an answer. Please try again.')
+            typer("How hard would you like to shake the ball?")
+            print('1. Soft\n2. Normal\n3. Hard')
+            shake_type = input()
+            shake_type = shake_type.lower()
