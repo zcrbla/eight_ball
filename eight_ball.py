@@ -98,9 +98,9 @@ while True:
                 typer("Alright, that was pretty good! Good job!")
                 Ball.normal_shake()
             elif shake_type == 3:
-                typer("Wow, that was aggresive... Are you alright?")
+                typer("Wow, that was aggressive... Are you alright?")
                 Ball.hard_shake()
             else:
                 print('literally how.') 
         except Exception as e:
-            typer(f"An error occured: {e}")
+            typer(f"An error occurred: {e}")
